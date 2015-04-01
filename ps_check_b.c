@@ -21,7 +21,7 @@ int		check_sb(t_ps *pb)
 	a = pb;
 	while (last && last->next)
 		last = last->next;
-	if (a->nb < a->next->nb && a->nb > last->nb)
+	if (a->nb < a->next->nb && (a->nb > last->nb || a->next->nb == last->nb))
 		return (1);
 	return (0);
 }

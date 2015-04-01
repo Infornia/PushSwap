@@ -88,7 +88,11 @@ t_ps	*sort(t_ps *a)
 		else if (check_rra(a))
 			ps_rra(&a);
 		else if (check_pb(a))
+		{
 			ps_pb(&a, &b);
+			if (b->next && check_sb(b))
+				ps_sb(&b);
+		}
 	}
 	if (ps_ok(a, b))
 		pstr("SUCCESSFULL!!!!!!!!\n");
