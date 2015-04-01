@@ -70,7 +70,12 @@ t_ps	*sort(t_ps *a)
 				{
 					ps_pa(&a, &b);
 					if (check_sa(a))
-						ps_sa(&a);
+					{
+						if (check_sb(b))
+							ps_ss(&a, &b);
+						else
+							ps_sa(&a);
+					}
 				}
 				else if (check_sb(b))
 					ps_sb(&b);
@@ -91,7 +96,12 @@ t_ps	*sort(t_ps *a)
 		{
 			ps_pb(&a, &b);
 			if (b->next && check_sb(b))
-				ps_sb(&b);
+			{
+				if (check_sa(a))
+					ps_ss(&a, &b);
+				else
+					ps_sb(&b);
+			}
 		}
 	}
 	if (ps_ok(a, b))
