@@ -18,12 +18,6 @@ void	ps_error(void)
 		exit(0);
 }
 
-void	pstr(char *s)
-{
-	while (*s)
-		write(1, &(*s++), 1);
-}
-
 static int		ps_ok(t_ps *a, t_ps *b)
 {
 	t_ps	*tmp;
@@ -31,67 +25,39 @@ static int		ps_ok(t_ps *a, t_ps *b)
 	tmp = a;
 
 	if (b)
-		return (0);
+		return (1);
 	while (tmp && tmp->next)
 	{
 		if (tmp->nb > tmp->next->nb)
-			return (0);
+			return (1);
 		tmp = tmp->next;
 	}
-	return (1);
+	return (0);
 }
 
-static int		ok_ab(t_ps *a)
-{
-	t_ps	*tmp;
-
-	tmp = a;
-	while (tmp && tmp->next)
-	{
-		if (tmp->nb > tmp->next->nb)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 t_ps	*sort(t_ps *a)
 {
 	t_ps	*b;
+	int		i;
+	int		max;
 
 	b = NULL;
-	while (!ps_ok(a, b))
+	max = 0;
+	while (a && ps_ok(a, b))
 	{
-		if (ok_ab(a))
+		i = 0;
+		while (b && a->nb < b->nb && i < max)
 		{
-			pstr("Fin tri de a\n");
-			while ((b && ok_ab(b)) || !ok_ab(b))
-			{
-				if (check_pa(b))
-				{
-					ps_pa(&a, &b);
-					if (check_sa(a))
-						ps_sa(&a);
-				}
-				else if (check_sb(b))
-					ps_sb(&b);
-				else if (check_rb(b))
-					ps_rb(&b);
-				else if (check_rrb(b))
-					ps_rrb(&b);
-			}
-			break;
+			ps_rb(&b);
+			i++;
 		}
-		else if (check_sa(a))
-			ps_sa(&a);
-		else if (check_ra(a))
-			ps_ra(&a);
-		else if (check_rra(a))
-			ps_rra(&a);
-		else if (check_pb(a))
-			ps_pb(&a, &b);
+		ps_pb(&a, &b);
+		while (i-- > 0)
+			ps_rrb(&b);
+		max++;
 	}
-	if (ps_ok(a, b))
-		pstr("SUCCESSFULL!!!!!!!!\n");
+	while (b)
+		ps_pa(&a, &b);
 	return (a);
 }
 
@@ -108,30 +74,4 @@ int		main(int ac, char **av)
 	write(1, "\b\n", 2);
 	ps_del(a);
 	return (0);
-}
-
-t_ps	*sort2(t_ps *a)
-{
-	t_ps	*b;
-	int		i;
-	int		max;
-
-	b = NULL;
-	max = 0;
-	while (a && !ps_ok(a, b))
-	{
-		i = 0;
-		while (b && a->nb < b->nb && i < max)
-		{
-			ps_rb(&b);
-			i++;
-		}
-		ps_pb(&a, &b);
-		while (i-- > 0)
-			ps_rrb(&b);
-		max++;
-	}
-	while (b)
-		ps_pa(&a, &b);
-	return (a);
 }

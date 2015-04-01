@@ -26,8 +26,6 @@ SRC = main.c\
 	  ps_ss.c\
 	  ps_r.c\
 	  ps_rr.c\
-	  ps_check_a.c\
-	  ps_check_b.c\
 	  tt_atoi.c\
 	  tt_isspace.c\
 

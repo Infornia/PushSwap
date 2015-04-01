@@ -58,13 +58,4 @@ int			ps_rrr(t_ps **a, t_ps **b);
 int			ps_rra(t_ps **a);
 int			ps_rrb(t_ps **b);
 
-int			check_sa(t_ps *pa);
-int			check_ra(t_ps *pa);
-int			check_rra(t_ps *pa);
-int			check_pb(t_ps *pa);
-
-int			check_sb(t_ps *pb);
-int			check_rb(t_ps *pb);
-int			check_rrb(t_ps *pb);
-int			check_pa(t_ps *pb);
 #endif /* !PS_H */
