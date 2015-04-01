@@ -41,6 +41,7 @@ void		ps_back(t_ps **head, t_ps *new);
 /*
  ** Ps_Functions
 */
+void		ps_error(void);
 
 void		ps_pa(t_ps **a, t_ps **b);
 void		ps_pb(t_ps **a, t_ps **b);
