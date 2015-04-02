@@ -44,6 +44,7 @@ typedef struct			s_data
 	int				color[3];
 	int				nb_color_opt;
 	int				nb_nbr;
+	int				special;
 }						t_data;
 
 /*
@@ -100,13 +101,15 @@ int			ps_rrb(t_ps **b);
  ** Ps_Check
 */
 
-int			check_sa(t_ps *pa);
-int			check_ra(t_ps *pa);
-int			check_rra(t_ps *pa);
+int			check_sa(t_data *d, t_ps *pa);
+int			check_ra(t_data *d, t_ps *pa);
+int			check_rra(t_data *d, t_ps *pa);
+int			magic_check_a(t_data *d, t_ps **pa);
 int			check_pb(t_ps *pa);
 
 int			check_sb(t_ps *pb);
 int			check_rb(t_ps *pb);
 int			check_rrb(t_ps *pb);
+int			magic_check_b(t_data *d, t_ps *pb);
 int			check_pa(t_ps *pb);
 #endif /* !PS_H */

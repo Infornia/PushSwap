@@ -31,15 +31,9 @@ static int		ps_s(t_ps **h)
 
 void			ps_ss(t_ps **a, t_ps **b)
 {
-	int		i;
-
-	i = ps_sa(a) + ps_sb(b);
-	if (i == 3)
-		write(1, "ss ", 3);
-	if (i == 2)
-		write(1, "sa ", 3);
-	if (i == 1)
-		write(1, "sb ", 3);
+	ps_s(a);
+	ps_s(b);
+	write(1, "ss ", 3);
 }
 
 int				ps_sa(t_ps **a)

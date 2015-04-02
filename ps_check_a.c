@@ -12,7 +12,7 @@
 
 #include "ps.h"
 
-int		check_sa(t_ps *pa)
+int		check_sa(t_data *d, t_ps *pa)
 {
 	t_ps	*a;
 	t_ps	*last;
@@ -21,36 +21,78 @@ int		check_sa(t_ps *pa)
 	a = pa;
 	while (last && last->next)
 		last = last->next;
-	if (a->nb > a->next->nb && a->nb < last->nb)
+	if (a->nb > a->next->nb && (a->nb < last->nb || d->special > 1))
+	{
+		if (d->special)
+			d->special--;
 		return (1);
+	}
 	return (0);
 }
 
-int		check_rra(t_ps *pa)
+int		check_rra(t_data *d, t_ps *pa)
 {
 	t_ps	*a;
 	t_ps	*last;
 
 	a = pa;
-	last = a;
+	last = pa;
 	while (last && last->next)
 		last = last->next;
-	if (a->nb < a->next->nb && a->nb > last->nb)
+	if (a->nb > last->nb && (a->nb < a->next->nb || d->special))
+	{
+		if (d->special)
+			d->special--;
 		return (1);
+	}
 	return (0);
 }
 
-int		check_ra(t_ps *pa)
+int		check_ra(t_data *d, t_ps *pa)
 {
 	t_ps	*a;
 	t_ps	*last;
 
 	a = pa;
-	last = a;
+	last = pa;
 	while (last && last->next)
 		last = last->next;
-	if (a->nb > a->next->nb && a->nb > last->nb)
+	if (a->nb > last->nb && (a->nb > a->next->nb || d->special))
+	{
+		if (d->special)
+			d->special--;
 		return (1);
+	}
+	return (0);
+}
+
+int		magic_check_a(t_data *d, t_ps **pa)
+{
+	int		stop;
+	int		count;
+	int		mid_or_feed;
+	t_ps	*tmp;
+
+	stop = 0;
+	count = 0;
+	mid_or_feed = d->nb_nbr / 2;
+	tmp = *pa;
+	while (tmp && tmp->next)
+	{
+		tmp->nb < tmp->next->nb && !stop ? count++ : stop++;
+		tmp = tmp->next;
+	}
+	stop++;
+	if (mid_or_feed <= count && stop > 1)
+	{
+		d->special = stop;
+		while (stop)
+		{
+			ps_rra(pa);
+			stop--;
+		}
+		return (1);
+	}
 	return (0);
 }
 
@@ -60,7 +102,7 @@ int		check_pb(t_ps *pa)
 	t_ps	*last;
 
 	a = pa;
-	last = a;
+	last = pa;
 	while (last && last->next)
 		last = last->next;
 	if (a->nb < a->next->nb && a->nb < last->nb)

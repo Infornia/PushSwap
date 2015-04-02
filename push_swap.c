@@ -52,14 +52,18 @@ void			sort(t_data *d, t_ps *a)
 	{
 		if (ok_ab(a))
 		{
-			pstr("Fin tri de a\n\n");
+			pstr("\nFin tri de a\n\n");
 			while ((b && ok_ab(b)) || !ok_ab(b))
 			{
 				if (check_pa(b))
 				{
 					ps_pa(&a, &b);
-					if (check_sa(a))
+					if (check_sa(d, a))
 						check_sb(b) ? ps_ss(&a, &b) : ps_sa(&a);
+					else if (check_ra(d, a))
+						check_rb(b) ? ps_rr(&a, &b) : ps_ra(&a);
+					else if (check_rra(d, a))
+						check_rrb(b) ? ps_rrr(&a, &b) : ps_rra(&a);
 				}
 				else if (check_sb(b))
 					ps_sb(&b);
@@ -72,17 +76,23 @@ void			sort(t_data *d, t_ps *a)
 			}
 			break;
 		}
-		else if (check_sa(a))
+		else if (check_sa(d, a))
 			ps_sa(&a);
-		else if (check_ra(a))
+		else if (check_ra(d, a))
 			ps_ra(&a);
-		else if (check_rra(a))
+		else if (check_rra(d, a))
 			ps_rra(&a);
+		else if (magic_check_a(d, &a))
+			;
 		else if (check_pb(a))
 		{
 			ps_pb(&a, &b);
 			if (b->next && check_sb(b))
-				check_sa(a) ? ps_ss(&a, &b) : ps_sb(&b);
+				check_sa(d, a) ? ps_ss(&a, &b) : ps_sb(&b);
+			else if (b->next && check_rb(b))
+				check_ra(d, a) ? ps_rr(&a, &b) : ps_rb(&b);
+			else if (b->next && check_rrb(b))
+				check_rra(d, a) ? ps_rrr(&a, &b) : ps_rrb(&b);
 		}
 		if (chr_opt(d->opts, OPT_V))
 			ps_print_piles(a, b, d->color);
@@ -94,10 +104,15 @@ void			sort(t_data *d, t_ps *a)
 t_ps	*ps_init(t_data *d, int ac, char **av)
 {
 	t_ps	*a;
+	int		i;
 
+	i = -1;
 	a = NULL;
 	d->nb_color_opt = 0;
 	d->nb_nbr = 0;
+	d->special = 0;
+	while (++i < NB_OPTS)
+		d->opts[i] = '\0';
 	if (ac < 1)
 		ps_error();
 	while (--ac > 0)

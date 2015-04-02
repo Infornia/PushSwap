@@ -3,8 +3,8 @@
 This are empiric tests I did, if wanna know how I proceeded:
 
 2 Arguments:
-	1 2		end
-	2 1		rb
+1 2		end
+2 1		rb
 
 1 2 3		nb < < End
 
@@ -86,3 +86,5 @@ A checker
 		1 2 5 9 8 7 4 10 3 11 13 14 12
 		4 10 3 11 13 14 12
 		1 2 3 4 6 5
+
+
