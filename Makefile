@@ -21,6 +21,7 @@ SRC_PATH = ./
 
 OBJ = $(SRC:.c=.o)
 SRC = main.c\
+	  push_swap.c\
 	  ps_pile.c\
 	  ps_ps.c\
 	  ps_ss.c\
@@ -28,8 +29,9 @@ SRC = main.c\
 	  ps_rr.c\
 	  ps_check_a.c\
 	  ps_check_b.c\
-	  tt_atoi.c\
-	  tt_isspace.c\
+	  ps_utils.c\
+	  ps_utils2.c\
+	  ps_options.c\
 
 OBJS = $(addprefix $(OJB_PATH),$(OBJ))
 SRCS = $(addprefix $(SRC_PATH),$(SRC))

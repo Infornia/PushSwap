@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tt_isspace.c                                       :+:      :+:    :+:   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,48 @@
 
 #include "ps.h"
 
-int		tt_isspace(int c)
+void	ps_error(void)
 {
-	c = (unsigned char)c;
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-			|| c == ' ')
-		return (1);
-	return (0);
+		write(1, "Error\n", 6);
+		exit(0);
+}
+
+void	ps_pcolor(char *s, int color)
+{
+	pstr("\033[");
+	pnbr(color);
+	pstr("m");
+	pstr(s);
+	pstr("\033[0m");
+}
+
+void	ps_print_piles(t_ps *a, t_ps *b, int *color)
+{
+	t_ps	*tmp;
+
+	(void)color;
+	tmp = a;
+	if (tmp)
+			pstr("\b\nPile A: ");
+	while (tmp)
+	{
+		pnbr(tmp->nb);
+		if (tmp->next)
+			pstr(" ");
+		else
+			pstr("\n");
+		tmp = tmp->next;
+	}
+	tmp = b;
+	if (tmp)
+		pstr("Pile B: ");
+	while (tmp)
+	{
+		pnbr(tmp->nb);
+		if (tmp->next)
+			pstr(" ");
+		else
+			pstr("\n\n");
+		tmp = tmp->next;
+	}
 }

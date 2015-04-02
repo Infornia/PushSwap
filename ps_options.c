@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                               :+:      :+:    :+:   */
+/*   ps_option.c			                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,39 @@
 
 #include "ps.h"
 
-int		main(int ac, char **av)
-{
-	t_data	d;
-	t_ps	*a;
 
-	a = NULL;
-	a = ps_init(&d, ac, av);
-	sort(&d, a);
-	write(1, "\b\n", 2);
+int			chr_opt(char *opt, char c)
+{
+	if (!opt)
+		return (0);
+	while (*opt)
+	{
+		if (*opt == c)
+			return (1);
+		opt++;
+	}
 	return (0);
+}
+
+void		ps_option(t_data *d, char *s)
+{
+	int		opt;
+
+	opt = 0;
+	while (*(++s))
+	{
+		if (chr_opt(OPTS, *s))
+		{
+			if (!chr_opt(d->opts, *s))
+			{
+				d->opts[opt] = *s;
+				opt += 1;
+				if (*s <= '9' && *s >= '0')
+					d->nb_color_opt++;
+			}
+		}
+		else
+			ps_error();
+	}
+	d->opts[opt] = '\0';
 }
