@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/03 19:19:32 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,28 @@ int		magic_check_a(t_data *d, t_ps **pa)
 {
 	int		stop;
 	int		count;
+	int		yes;
 	int		mid_or_feed;
 	t_ps	*tmp;
 
+	yes = 0;
 	stop = 0;
 	count = 0;
 	mid_or_feed = d->nb_nbr / 2;
 	tmp = *pa;
-	while (tmp && tmp->next)
+	while (tmp && tmp->next && !d->special)
 	{
 		tmp->nb < tmp->next->nb && !stop ? count++ : stop++;
+		if (stop == 1 && !yes)
+			yes = tmp->nb;
+		if (yes && yes > tmp->next->nb)
+		{
+			stop++;
+			yes = 0;
+		}
 		tmp = tmp->next;
 	}
-	stop++;
-	if (mid_or_feed <= count && stop > 1)
+	if (mid_or_feed <= count && stop > 1 && !d->special)
 	{
 		d->special = stop;
 		while (stop)
