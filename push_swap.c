@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/04 07:19:07 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void			sort(t_data *d, t_ps *a)
 			pstr("\nFin tri de a\n\n");
 			while ((b && ok_ab(b)) || !ok_ab(b))
 			{
-				if (check_pa(b))
+				if (magic_check_b(d, &a, &b))
+					ps_rra(&a);
+				else if (check_pa(b))
 				{
 					ps_pa(&a, &b);
 					if (check_sa(d, a))

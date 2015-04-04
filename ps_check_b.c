@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/04 07:31:59 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,27 @@ int		check_rb(t_ps *pb)
 	return (0);
 }
 
-int		magic_check_b(t_data *d, t_ps *pb)
+int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 {
-	int		stop;
-	int		count;
-	int		mid_or_feed;
 	t_ps	*tmp;
+	int		magic_b;
 
-	stop = 0;
-	count = 0;
-	mid_or_feed = d->nb_nbr / 2;
-	tmp = pb;
-	while (tmp && tmp->next)
+	tmp = *pb;
+	magic_b = 0;
+	(void)d;
+	if (*pa && *pb && (*pa)->nb < tmp->nb)
 	{
-		tmp->nb > tmp->next->nb && !stop ? count++ : stop++;
-		tmp = tmp->next;
-	}
-	stop++;
-	if (mid_or_feed < count)
-	{
-		while (stop)
+		while (tmp && tmp->next && (*pa)->nb < tmp->nb)
 		{
-			ps_rb(&pb);
-			stop--;
+			magic_b++;
+			tmp = tmp->next;
+		}
+		if (!tmp->next)
+			magic_b++;
+		ps_ra(pa);
+		while (magic_b--)
+		{
+			ps_pa(pa, pb);
 		}
 		return (1);
 	}

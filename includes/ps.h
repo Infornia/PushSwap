@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/04 07:27:33 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,6 @@ int			check_pb(t_ps *pa);
 int			check_sb(t_ps *pb);
 int			check_rb(t_ps *pb);
 int			check_rrb(t_ps *pb);
-int			magic_check_b(t_data *d, t_ps *pb);
+int			magic_check_b(t_data *d, t_ps **pa, t_ps **pb);
 int			check_pa(t_ps *pb);
 #endif /* !PS_H */
