@@ -79,7 +79,9 @@ This are empiric tests I did, if wanna know how I proceeded:
 					ra		3 2 4 5
 							sa		2 3 4 5
 									pa		1 2 3 4 5
-
+pb pb pb sa pb sa pb ss
+4 9 10 3 11 13 14 12
+8 7 5 2 1
 
 A checker
 		2 1 3 6 5 8
