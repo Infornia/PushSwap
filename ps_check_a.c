@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/03 19:19:32 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/04 06:26:55 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		magic_check_a(t_data *d, t_ps **pa)
 		tmp->nb < tmp->next->nb && !stop ? count++ : stop++;
 		if (stop == 1 && !yes)
 			yes = tmp->nb;
-		if (yes && yes > tmp->next->nb)
+		if (yes && yes > tmp->next->nb && tmp->next->next)
 		{
 			stop++;
 			yes = 0;
