@@ -16,10 +16,12 @@ int		main(int ac, char **av)
 {
 	t_data	d;
 	t_ps	*a;
+	t_ps	*b;
 
 	a = NULL;
+	b = NULL;
 	a = ps_init(&d, ac, av);
-	sort(&d, a);
+	sort_a(&d, a, b);
 	write(1, "\b\n", 2);
 	return (0);
 }

@@ -95,11 +95,16 @@ int		magic_check_a(t_data *d, t_ps **pa)
 	if (mid_or_feed <= count && stop > 1 && !d->special)
 	{
 		d->special = stop;
+		count = tmp->nb;
 		while (stop)
 		{
 			ps_rra(pa);
+			if (chr_opt(d->opts, OPT_V))
+				ps_print_piles(*pa, NULL, d->color);
+			count = (*pa)->nb < count ? (*pa)->nb : count;
 			stop--;
 		}
+		ps_special_rra(d, pa, count);
 		return (1);
 	}
 	return (0);

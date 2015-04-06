@@ -76,7 +76,7 @@ void		ps_back(t_ps **head, t_ps *new);
  ** Ps_Functions
 */
 t_ps		*ps_init(t_data *d, int ac, char **av);
-void		sort(t_data *d, t_ps *a);
+void		sort_a(t_data *d, t_ps *a, t_ps *b);
 void		ps_error(void);
 
 void		ps_option(t_data *d, char *s);
@@ -95,6 +95,7 @@ int			ps_rb(t_ps **b);
 
 int			ps_rrr(t_ps **a, t_ps **b);
 int			ps_rra(t_ps **a);
+int			ps_special_rra(t_data *d, t_ps **a, int min);
 int			ps_rrb(t_ps **b);
 
 /*

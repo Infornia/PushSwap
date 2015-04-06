@@ -72,9 +72,13 @@ int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 		if (!tmp->next)
 			magic_b++;
 		ps_ra(pa);
+		if (chr_opt(d->opts, OPT_V))
+			ps_print_piles(*pa, NULL, d->color);
 		while (magic_b--)
 		{
 			ps_pa(pa, pb);
+			if (chr_opt(d->opts, OPT_V))
+				ps_print_piles(*pa, NULL, d->color);
 		}
 		return (1);
 	}

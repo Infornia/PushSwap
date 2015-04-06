@@ -43,41 +43,43 @@ static int		ok_ab(t_ps *pile)
 	return (1);
 }
 
-void			sort(t_data *d, t_ps *a)
+static int		sort_b(t_data *d, t_ps *a, t_ps *b)
 {
-	t_ps	*b;
+	pstr("\nFin tri de a\n\n");
+	while ((b && ok_ab(b)) || !ok_ab(b))
+	{
+		if (magic_check_b(d, &a, &b))
+			ps_rra(&a);
+		else if (check_pa(b))
+		{
+			ps_pa(&a, &b);
+			if (check_sa(d, a))
+				check_sb(b) ? ps_ss(&a, &b) : ps_sa(&a);
+			else if (check_ra(d, a))
+				check_rb(b) ? ps_rr(&a, &b) : ps_ra(&a);
+			else if (check_rra(d, a))
+				check_rrb(b) ? ps_rrr(&a, &b) : ps_rra(&a);
+		}
+		else if (check_sb(b))
+			ps_sb(&b);
+		else if (check_rb(b))
+			ps_rb(&b);
+		else if (check_rrb(b))
+			ps_rrb(&b);
+		if (chr_opt(d->opts, OPT_V))
+			ps_print_piles(a, b, d->color);
+	}
+	if (ps_ok(a, b))
+		ps_pcolor("\n\nSUCCESSFULL!!!!!!!!\n", d->color[1]);
+	return (1);
+}
 
-	b = NULL;
+void			sort_a(t_data *d, t_ps *a, t_ps *b)
+{
 	while (!ps_ok(a, b))
 	{
-		if (ok_ab(a))
-		{
-			pstr("\nFin tri de a\n\n");
-			while ((b && ok_ab(b)) || !ok_ab(b))
-			{
-				if (magic_check_b(d, &a, &b))
-					ps_rra(&a);
-				else if (check_pa(b))
-				{
-					ps_pa(&a, &b);
-					if (check_sa(d, a))
-						check_sb(b) ? ps_ss(&a, &b) : ps_sa(&a);
-					else if (check_ra(d, a))
-						check_rb(b) ? ps_rr(&a, &b) : ps_ra(&a);
-					else if (check_rra(d, a))
-						check_rrb(b) ? ps_rrr(&a, &b) : ps_rra(&a);
-				}
-				else if (check_sb(b))
-					ps_sb(&b);
-				else if (check_rb(b))
-					ps_rb(&b);
-				else if (check_rrb(b))
-					ps_rrb(&b);
-				if (chr_opt(d->opts, OPT_V))
-					ps_print_piles(a, b, d->color);
-			}
+		if (ok_ab(a) && sort_b(d, a, b))
 			break;
-		}
 		else if (check_sa(d, a))
 			ps_sa(&a);
 		else if (check_ra(d, a))
@@ -99,20 +101,21 @@ void			sort(t_data *d, t_ps *a)
 		if (chr_opt(d->opts, OPT_V))
 			ps_print_piles(a, b, d->color);
 	}
-	if (ps_ok(a, b))
-		ps_pcolor("\nSUCCESSFULL!!!!!!!!\n", d->color[1]);
+	if (ps_ok(a, NULL))
+		ps_pcolor("\nYOU'RE THE BEST MY LORD\n", d->color[2]);
 	ps_del(a);
 }
+
 t_ps	*ps_init(t_data *d, int ac, char **av)
 {
 	t_ps	*a;
 	int		i;
 
-	i = -1;
 	a = NULL;
 	d->nb_color_opt = 0;
 	d->nb_nbr = 0;
 	d->special = 0;
+	i = -1;
 	while (++i < NB_OPTS)
 		d->opts[i] = '\0';
 	if (ac < 1)
