@@ -57,6 +57,15 @@ void		pstr(char *s);
 void		pnbr(int nb);
 
 /*
+ ** Errors
+*/
+
+void		ps_error(void);
+void		ps_error_number(t_data d, t_ps *a);
+int			ps_error_letter(char *s);
+void		ps_option_error(char c);
+
+/*
  ** Prints
 */
 
@@ -77,7 +86,6 @@ void		ps_back(t_ps **head, t_ps *new);
 */
 t_ps		*ps_init(t_data *d, int ac, char **av);
 void		sort_a(t_data *d, t_ps *a, t_ps *b);
-void		ps_error(void);
 
 void		ps_option(t_data *d, char *s);
 int			chr_opt(char *opt, char c);

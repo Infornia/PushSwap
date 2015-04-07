@@ -21,6 +21,7 @@ int		main(int ac, char **av)
 	a = NULL;
 	b = NULL;
 	a = ps_init(&d, ac, av);
+	ps_error_number(d, a);
 	sort_a(&d, a, b);
 	write(1, "\b\n", 2);
 	return (0);

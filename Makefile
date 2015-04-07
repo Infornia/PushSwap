@@ -21,6 +21,7 @@ SRC_PATH = ./
 
 OBJ = $(SRC:.c=.o)
 SRC = main.c\
+	  ps_error.c\
 	  push_swap.c\
 	  ps_pile.c\
 	  ps_ps.c\
@@ -30,7 +31,7 @@ SRC = main.c\
 	  ps_check_a.c\
 	  ps_check_b.c\
 	  ps_utils.c\
-	  ps_utils2.c\
+	  ps_print.c\
 	  ps_options.c\
 
 OBJS = $(addprefix $(OJB_PATH),$(OBJ))

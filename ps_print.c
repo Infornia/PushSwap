@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_utils2.c                                        :+:      :+:    :+:   */
+/*   ps_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,59 +12,42 @@
 
 #include "ps.h"
 
-void	pchar(char c)
+void	ps_pcolor(char *s, int color)
 {
-		write(1, &c, 1);
+	pstr("\033[");
+	pnbr(color);
+	pstr("m");
+	pstr(s);
+	pstr("\033[0m");
 }
 
-void	pstr(char *s)
+void	ps_print_piles(t_ps *a, t_ps *b, int *color)
 {
-	while (*s)
-		write(1, &(*s++), 1);
-}
+	t_ps	*tmp;
 
-void	pnbr(int n)
-{
-	if (n >= 10)
+	(void)color;
+	tmp = a;
+	if (tmp)
+			pstr("\b\nPile A: ");
+	while (tmp)
 	{
-		pnbr(n / 10);
-		pnbr(n % 10);
+		pnbr(tmp->nb);
+		if (tmp->next)
+			pstr(" ");
+		else
+			pstr("\n");
+		tmp = tmp->next;
 	}
-	else
-		pchar(n + '0');
-}
-
-int		tt_isspace(int c)
-{
-	c = (unsigned char)c;
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-			|| c == ' ')
-		return (1);
-	return (0);
-}
-
-int			tt_atoi(const char *str)
-{
-	int		sign;
-	int		result;
-
-	result = 0;
-	sign = 0;
-	while (tt_isspace(*str))
-		str++;
-	if (*str == '-')
+	tmp = b;
+	if (tmp)
+		pstr("Pile B: ");
+	while (tmp)
 	{
-		sign = -1;
-		str++;
+		pnbr(tmp->nb);
+		if (tmp->next)
+			pstr(" ");
+		else
+			pstr("\n\n");
+		tmp = tmp->next;
 	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - 48;
-		str++;
-	}
-	if (sign)
-		result = -result;
-	return (result);
 }

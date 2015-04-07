@@ -94,17 +94,30 @@ int		magic_check_a(t_data *d, t_ps **pa)
 	}
 	if (mid_or_feed <= count && stop > 1 && !d->special)
 	{
-		d->special = stop;
+		d->special = 0;
 		count = tmp->nb;
 		while (stop)
 		{
+			if (d->special++ == 0)
+			{
+				ps_rra(pa);
+				if (chr_opt(d->opts, OPT_V))
+					ps_print_piles(*pa, NULL, d->color);
+				count = (*pa)->nb < count ? (*pa)->nb : count;
+				stop--;
+			}
 			ps_rra(pa);
 			if (chr_opt(d->opts, OPT_V))
 				ps_print_piles(*pa, NULL, d->color);
 			count = (*pa)->nb < count ? (*pa)->nb : count;
+			if (check_sa(d, *pa))
+				ps_sa(pa);
 			stop--;
 		}
-		ps_special_rra(d, pa, count);
+		//if (ps_special_rra(d, pa, count))
+		//	d->special++;
+		//if (check_sa(d, *pa))
+		//	ps_sa(pa);
 		return (1);
 	}
 	return (0);

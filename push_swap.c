@@ -124,6 +124,8 @@ t_ps	*ps_init(t_data *d, int ac, char **av)
 	{
 		if (av[ac][0] == '-' && av[ac][1] <= 'z' && av[ac][1] >= 'a')
 			ps_option(d, av[ac]);
+		else if (ps_error_letter(av[ac]))
+			ps_error();
 		else
 		{
 			ps_front(&a, ps_new(tt_atoi(av[ac])));

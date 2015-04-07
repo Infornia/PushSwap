@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_option.c			                            :+:      :+:    :+:   */
+/*   ps_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,53 @@
 
 #include "ps.h"
 
-
-int			chr_opt(char *opt, char c)
+void	ps_error(void)
 {
-	if (!opt)
-		return (0);
-	while (*opt)
+		write(1, "Error\n", 6);
+		exit(0);
+}
+
+void	ps_option_error(char c)
+{
+		pstr("PushSwap: invalid option -- -");
+		pstr(&c);
+		pstr("\nUsage: ./push_swap [-");
+		pstr(OPTS);
+		pstr("]... [number 1] [number 2] ...\n");
+		exit(0);
+}
+
+int		ps_error_letter(char *s)
+{
+	while (*s)
 	{
-		if (*opt == c)
+		if (*s < '0' || *s > '9')
 			return (1);
-		opt++;
+		++s;
 	}
 	return (0);
 }
 
-void		ps_option(t_data *d, char *s)
+void	ps_error_number(t_data d, t_ps *a)
 {
-	int		opt;
+	t_ps	*tmp;
+	int		nb_tab[d.nb_nbr + 1];
+	int		i;
 
-	opt = 0;
-	while (*(++s))
+	tmp = a;
+	i = -1;
+	while (++i <= d.nb_nbr + 1)
+		nb_tab[i] = '\0';
+	while (tmp)
 	{
-		if (chr_opt(OPTS, *s))
+		i = 0;
+		while (nb_tab[i])
 		{
-			if (!chr_opt(d->opts, *s))
-			{
-				d->opts[opt] = *s;
-				opt += 1;
-				if (*s <= '9' && *s >= '0')
-					d->nb_color_opt++;
-			}
+			if (nb_tab[i] == tmp->nb)
+				ps_error();
+			i++;
 		}
-		else
-			ps_option_error(*s);
+		nb_tab[i] = tmp->nb;
+		tmp = tmp->next;
 	}
-	d->opts[opt] = '\0';
 }
