@@ -18,14 +18,19 @@ void	ps_error(void)
 		exit(0);
 }
 
-void	ps_option_error(char c)
+void	ps_error_usage(void)
 {
-		pstr("PushSwap: invalid option -- -");
-		pstr(&c);
 		pstr("\nUsage: ./push_swap [-");
 		pstr(OPTS);
 		pstr("]... [number 1] [number 2] ...\n");
 		exit(0);
+}
+
+void	ps_option_error(char c)
+{
+		pstr("PushSwap: invalid option -- -");
+		pstr(&c);
+		ps_error_usage();
 }
 
 int		ps_error_letter(char *s)

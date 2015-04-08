@@ -29,7 +29,9 @@ SRC = main.c\
 	  ps_r.c\
 	  ps_rr.c\
 	  ps_check_a.c\
+	  ps_check_rev_a.c\
 	  ps_check_b.c\
+	  ps_check_list.c\
 	  ps_utils.c\
 	  ps_print.c\
 	  ps_options.c\

@@ -61,24 +61,21 @@ int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 
 	tmp = *pb;
 	magic_b = 0;
-	(void)d;
 	if (*pa && *pb && (*pa)->nb < tmp->nb)
 	{
-		while (tmp && tmp->next && (*pa)->nb < tmp->nb)
+		while (tmp && (*pa)->nb < tmp->nb)
 		{
 			magic_b++;
 			tmp = tmp->next;
 		}
-		if (!tmp->next)
-			magic_b++;
 		ps_ra(pa);
 		if (chr_opt(d->opts, OPT_V))
-			ps_print_piles(*pa, NULL, d->color);
+			ps_print_piles(d, *pa, *pb, 2);
 		while (magic_b--)
 		{
 			ps_pa(pa, pb);
 			if (chr_opt(d->opts, OPT_V))
-				ps_print_piles(*pa, NULL, d->color);
+				ps_print_piles(d, *pa, *pb, 2);
 		}
 		return (1);
 	}

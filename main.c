@@ -20,6 +20,8 @@ int		main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
+	if (ac == 1)
+		ps_error_usage();
 	a = ps_init(&d, ac, av);
 	ps_error_number(d, a);
 	sort_a(&d, a, b);

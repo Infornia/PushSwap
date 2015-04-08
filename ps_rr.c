@@ -74,5 +74,6 @@ int				ps_rra(t_ps **a)
 int				ps_rrb(t_ps **b)
 {
 	write(1, "rrb ", 4);
-	return (ps_rrs(b));
+	ps_rrs(b);
+	return (2);
 }

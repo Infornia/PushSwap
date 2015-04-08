@@ -22,20 +22,24 @@ static void		ps_ps(t_ps **dest, t_ps **src)
 	ps_front(dest, tmp);
 }
 
-void			ps_pa(t_ps **a, t_ps **b)
+int				ps_pa(t_ps **a, t_ps **b)
 {
 	if (*b)
 	{
 		ps_ps(a,b);
 		write(1, "pa ", 3);
+		return (1);
 	}
+	return (0);
 }
 
-void			ps_pb(t_ps **a, t_ps **b)
+int				ps_pb(t_ps **a, t_ps **b)
 {
 	if (*a)
 	{
 		ps_ps(b,a);
 		write(1, "pb ", 3);
+		return (2);
 	}
+	return (0);
 }

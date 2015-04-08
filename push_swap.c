@@ -49,29 +49,25 @@ static int		sort_b(t_data *d, t_ps *a, t_ps *b)
 	while ((b && ok_ab(b)) || !ok_ab(b))
 	{
 		if (magic_check_b(d, &a, &b))
-			ps_rra(&a);
+			ps_print_piles(d, a, b, ps_rra(&a));
 		else if (check_pa(b))
 		{
-			ps_pa(&a, &b);
-			if (check_sa(d, a))
-				check_sb(b) ? ps_ss(&a, &b) : ps_sa(&a);
-			else if (check_ra(d, a))
-				check_rb(b) ? ps_rr(&a, &b) : ps_ra(&a);
-			else if (check_rra(d, a))
-				check_rrb(b) ? ps_rrr(&a, &b) : ps_rra(&a);
+			ps_print_piles(d, a, b, ps_pa(&a, &b));
+			ps_print_piles(d, a, b, check_post_pa(d, a, b));
 		}
 		else if (check_sb(b))
-			ps_sb(&b);
+			ps_print_piles(d, a, b, ps_sb(&b));
 		else if (check_rb(b))
-			ps_rb(&b);
+			ps_print_piles(d, a, b, ps_rb(&b));
 		else if (check_rrb(b))
-			ps_rrb(&b);
-		if (chr_opt(d->opts, OPT_V))
-			ps_print_piles(a, b, d->color);
+			ps_print_piles(d, a, b, ps_rrb(&b));
 	}
 	if (ps_ok(a, b))
+	{
 		ps_pcolor("\n\nSUCCESSFULL!!!!!!!!\n", d->color[1]);
-	return (1);
+		return (1);
+	}
+	return (0);
 }
 
 void			sort_a(t_data *d, t_ps *a, t_ps *b)
@@ -81,28 +77,23 @@ void			sort_a(t_data *d, t_ps *a, t_ps *b)
 		if (ok_ab(a) && sort_b(d, a, b))
 			break;
 		else if (check_sa(d, a))
-			ps_sa(&a);
+			ps_print_piles(d, a, b, ps_sa(&a));
 		else if (check_ra(d, a))
-			ps_ra(&a);
+			ps_print_piles(d, a, b, ps_ra(&a));
 		else if (check_rra(d, a))
-			ps_rra(&a);
+			ps_print_piles(d, a, b, ps_rra(&a));
 		else if (magic_check_a(d, &a))
 			;
 		else if (check_pb(a))
 		{
-			ps_pb(&a, &b);
-			if (b->next && check_sb(b))
-				check_sa(d, a) ? ps_ss(&a, &b) : ps_sb(&b);
-			else if (b->next && check_rb(b))
-				check_ra(d, a) ? ps_rr(&a, &b) : ps_rb(&b);
-			else if (b->next && check_rrb(b))
-				check_rra(d, a) ? ps_rrr(&a, &b) : ps_rrb(&b);
+			ps_print_piles(d, a, b, ps_pb(&a, &b));
+			ps_print_piles(d, a, b, check_post_pa(d, a, b));
 		}
-		if (chr_opt(d->opts, OPT_V))
-			ps_print_piles(a, b, d->color);
 	}
 	if (ps_ok(a, NULL))
 		ps_pcolor("\nYOU'RE THE BEST MY LORD\n", d->color[2]);
+	if (chr_opt(d->opts, OPT_N))
+		ps_pmoves(d->moves, d->color[3]);
 	ps_del(a);
 }
 
@@ -115,6 +106,7 @@ t_ps	*ps_init(t_data *d, int ac, char **av)
 	d->nb_color_opt = 0;
 	d->nb_nbr = 0;
 	d->special = 0;
+	d->moves = 0;
 	i = -1;
 	while (++i < NB_OPTS)
 		d->opts[i] = '\0';
@@ -132,8 +124,11 @@ t_ps	*ps_init(t_data *d, int ac, char **av)
 			d->nb_nbr += 1;
 		}
 	}
+	if (chr_opt(d->opts, OPT_V))
+		d->v = 1;
 	d->color[0] = 0;
 	d->color[1] = PINK;
 	d->color[2] = BLUE;
+	d->color[3] = GREEN;
 	return (a);
 }

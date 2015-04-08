@@ -22,11 +22,14 @@
 
 #define BLUE		36
 #define PINK		35
-#define OPTS		"12cv"
-#define NB_OPTS		5
+#define GREEN		34
+#define OPTS		"123cnv"
+#define NB_OPTS		7
 #define OPT_V		'v'
+#define OPT_N		'n'
 #define OPT_PINK	'1'
 #define OPT_BLUE	'2'
+#define OPT_GREEN	'3'
 
 /*
  ** Structures
@@ -41,7 +44,9 @@ typedef struct			s_ps
 typedef struct			s_data
 {
 	char			opts[NB_OPTS + 1];
-	int				color[3];
+	int				color[4];
+	int				v;
+	int				moves;
 	int				nb_color_opt;
 	int				nb_nbr;
 	int				special;
@@ -61,6 +66,7 @@ void		pnbr(int nb);
 */
 
 void		ps_error(void);
+void		ps_error_usage(void);
 void		ps_error_number(t_data d, t_ps *a);
 int			ps_error_letter(char *s);
 void		ps_option_error(char c);
@@ -70,7 +76,8 @@ void		ps_option_error(char c);
 */
 
 void		ps_pcolor(char *s, int color);
-void		ps_print_piles(t_ps *a, t_ps *b, int *color);
+void		ps_pmoves(int moves, int color);
+void		ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color);
 
 /*
  ** Chain_list
@@ -90,10 +97,10 @@ void		sort_a(t_data *d, t_ps *a, t_ps *b);
 void		ps_option(t_data *d, char *s);
 int			chr_opt(char *opt, char c);
 
-void		ps_pa(t_ps **a, t_ps **b);
-void		ps_pb(t_ps **a, t_ps **b);
+int			ps_pa(t_ps **a, t_ps **b);
+int			ps_pb(t_ps **a, t_ps **b);
 
-void		ps_ss(t_ps **a, t_ps **b);
+int			ps_ss(t_ps **a, t_ps **b);
 int			ps_sa(t_ps **a);
 int			ps_sb(t_ps **b);
 
@@ -109,6 +116,8 @@ int			ps_rrb(t_ps **b);
 /*
  ** Ps_Check
 */
+int			check_post_pa(t_data *d, t_ps *a, t_ps *b);
+int			check_post_pb(t_data *d, t_ps *a, t_ps *b);
 
 int			check_sa(t_data *d, t_ps *pa);
 int			check_ra(t_data *d, t_ps *pa);
