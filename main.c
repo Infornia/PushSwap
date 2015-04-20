@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/20 19:12:13 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int		main(int ac, char **av)
 	a = ps_init(&d, ac, av);
 	ps_error_number(d, a);
 	sort_a(&d, a, b);
-	write(1, "\b\n", 2);
+//	write(1, "\b\n", 2);
 	return (0);
 }

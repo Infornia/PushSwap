@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/04 07:19:07 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/20 20:10:43 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,23 @@ static int		sort_b(t_data *d, t_ps *a, t_ps *b)
 	while ((b && ok_ab(b)) || !ok_ab(b))
 	{
 		if (magic_check_b(d, &a, &b))
-			ps_print_piles(d, a, b, ps_rra(&a));
+			;
+		else if (check_sb(b))
+			ps_sb(&b);
+		else if (check_rb(b))
+			ps_rb(&b);
+		else if (check_rrb(b))
+			ps_rrb(&b);
 		else if (check_pa(b))
 		{
-			ps_print_piles(d, a, b, ps_pa(&a, &b));
-			ps_print_piles(d, a, b, check_post_pa(d, a, b));
+			ps_pa(&a, &b);
+			check_post_pa(d, a, b);
 		}
-		else if (check_sb(b))
-			ps_print_piles(d, a, b, ps_sb(&b));
-		else if (check_rb(b))
-			ps_print_piles(d, a, b, ps_rb(&b));
-		else if (check_rrb(b))
-			ps_print_piles(d, a, b, ps_rrb(&b));
+		ps_print_piles(d, a, b, 1);
 	}
 	if (ps_ok(a, b))
 	{
-		ps_pcolor("\n\nSUCCESSFULL!!!!!!!!\n", d->color[1]);
+	//	ps_pcolor("\n\nSUCCESSFULL!!!!!!!!\n", d->color[1]);
 		return (1);
 	}
 	return (0);
@@ -77,18 +78,20 @@ void			sort_a(t_data *d, t_ps *a, t_ps *b)
 		if (ok_ab(a) && sort_b(d, a, b))
 			break;
 		else if (check_sa(d, a))
-			ps_print_piles(d, a, b, ps_sa(&a));
+			ps_sa(&a);
 		else if (check_ra(d, a))
-			ps_print_piles(d, a, b, ps_ra(&a));
+			ps_ra(&a);
 		else if (check_rra(d, a))
-			ps_print_piles(d, a, b, ps_rra(&a));
+			ps_rra(&a);
 		else if (magic_check_a(d, &a))
 			;
 		else if (check_pb(a))
 		{
-			ps_print_piles(d, a, b, ps_pb(&a, &b));
-			ps_print_piles(d, a, b, check_post_pa(d, a, b));
+			ps_pb(&a, &b);
+			ps_print_piles(d, a, b, 1);
+			check_post_pb(d, a, b);
 		}
+		ps_print_piles(d, a, b, 1);
 	}
 	if (ps_ok(a, NULL))
 		ps_pcolor("\nYOU'RE THE BEST MY LORD\n", d->color[2]);

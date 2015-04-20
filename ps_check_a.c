@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/04 08:03:44 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/20 20:13:30 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,14 @@ int		magic_check_a(t_data *d, t_ps **pa)
 		{
 			if (d->special == 0)
 			{
-				ps_print_piles(d, *pa, NULL, ps_rra(pa));
+				ps_rra(pa);
+				ps_print_piles(d, *pa, NULL, 1);
 				count = (*pa)->nb < count ? (*pa)->nb : count;
 				stop--;
 				d->special = 1;
 			}
-			ps_print_piles(d, *pa, NULL, ps_rra(pa));
+			ps_rra(pa);
+			ps_print_piles(d, *pa, NULL, 1);
 			count = (*pa)->nb < count ? (*pa)->nb : count;
 			if (check_sa(d, *pa))
 				ps_print_piles(d, *pa, NULL, ps_sa(pa));

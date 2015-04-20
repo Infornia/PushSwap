@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/04 07:31:59 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/20 19:15:03 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		check_sb(t_ps *pb)
 	last = pb;
 	while (last && last->next)
 		last = last->next;
-	if (b && (!b->next || b->nb < b->next->nb) && b->nb >= last->nb)
+	if (b && b->next && b->nb < b->next->nb && b->nb > last->nb)
 		return (1);
 	return (0);
 }
@@ -35,7 +35,7 @@ int		check_rrb(t_ps *pb)
 	last = pb;
 	while (last && last->next)
 		last = last->next;
-	if (b->nb > b->next->nb && b->nb < last->nb)
+	if (b && b->next && b->nb > b->next->nb && b->nb < last->nb)
 		return (1);
 	return (0);
 }
@@ -49,7 +49,7 @@ int		check_rb(t_ps *pb)
 	last = pb;
 	while (last && last->next)
 		last = last->next;
-	if (b->nb < b->next->nb && b->nb < last->nb)
+	if (b && b->next && b->nb < b->next->nb && b->nb < last->nb)
 		return (1);
 	return (0);
 }
@@ -61,22 +61,21 @@ int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 
 	tmp = *pb;
 	magic_b = 0;
-	if (*pa && *pb && (*pa)->nb < tmp->nb)
+	if (*pa && *pb && (*pb)->next && (*pa)->nb < tmp->nb)
 	{
-		while (tmp && (*pa)->nb < tmp->nb)
+		while (tmp && tmp->next && (*pa)->nb < tmp->nb)
 		{
 			magic_b++;
 			tmp = tmp->next;
 		}
-		ps_ra(pa);
-		if (chr_opt(d->opts, OPT_V))
-			ps_print_piles(d, *pa, *pb, 2);
+		ps_print_piles(d, *pa, *pb, ps_ra(pa));
 		while (magic_b--)
 		{
-			ps_pa(pa, pb);
+			ps_print_piles(d, *pa, *pb, ps_pa(pa, pb));
 			if (chr_opt(d->opts, OPT_V))
 				ps_print_piles(d, *pa, *pb, 2);
 		}
+		ps_print_piles(d, *pa, *pb, ps_rra(pa));
 		return (1);
 	}
 	return (0);
@@ -93,7 +92,7 @@ int		check_pa(t_ps *pb)
 		return (1);
 	while (last && last->next)
 		last = last->next;
-	if (b->nb > b->next->nb && b->nb > last->nb)
+	if (!b->next || (b->nb > b->next->nb && b->nb > last->nb))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/04 08:03:44 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/20 20:09:28 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@ int		check_post_pb(t_data *d, t_ps *a, t_ps *b)
 		check_rb(b) ? ps_rr(&a, &b) : ps_ra(&a);
 	else if (check_rra(d, a))
 		check_rrb(b) ? ps_rrr(&a, &b) : ps_rra(&a);
+	else if (check_sb(b))
+		ps_sb(&b);
+	else if (check_rb(b))
+		ps_rb(&b);
+	else if (check_rrb(b))
+		ps_rrb(&b);
 	else
 		return (0);
-	if (d->v)
-		ps_print_piles(d, a, b, 1);
-	return (2);
+	return (1);
 }
 
 int		check_post_pa(t_data *d, t_ps *a, t_ps *b)
