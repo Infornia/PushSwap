@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 21:11:46 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/27 23:52:38 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		ps_back(t_ps **head, t_ps *new);
 */
 t_ps		*ps_init(t_data *d, int ac, char **av);
 void		sort_a(t_data *d, t_ps *a, t_ps *b);
+int			ok_ab(t_ps *p);
 
 void		ps_option(t_data *d, char *s);
 int			chr_opt(char *opt, char c);
@@ -118,8 +119,8 @@ int			ps_rrb(t_ps **b);
 /*
  ** Ps_Check
 */
-int			check_post_pa(t_data *d, t_ps **a, t_ps **b);
-int			check_post_pb(t_data *d, t_ps **a, t_ps **b);
+int			check_post_pa(t_data *d, t_ps **a, t_ps **b, int go);
+int			check_post_pb(t_data *d, t_ps **a, t_ps **b, int go);
 
 int			check_sa(t_data *d, t_ps *pa);
 int			check_ra(t_data *d, t_ps *pa);

@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 21:32:50 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/27 23:33:03 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 	tmp = *pa;
 	if (*pa && *pb && (*pa)->nb < (*pb)->nb)
 	{
-		while (tmp && tmp->next && (*pb)->nb > tmp->nb)
+		while (tmp && (*pb)->nb > tmp->nb)
 		{
 			magic_a++;
 			tmp = tmp->next;
@@ -87,19 +87,23 @@ int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 		}
 		while (magic_b || plus)
 		{
+			ps_print_piles(d, *pa, *pb, 1);
 			tmp = get_last(*pa);
-			if (*pb && (*pb)->nb > tmp->nb)
+			if (*pb && ((*pb)->nb > tmp->nb || (*pa)->nb < tmp->nb))
 			{
+				//pstr("yep");
 				ps_pa(pa, pb);
-				ps_print_piles(d, *pa, *pb, 1);
+				check_post_pa(d, pa, pb, 0);
 				magic_b--;
 			}
-			else
+			else if (plus)
 			{
 				ps_rra(pa);
 				ps_print_piles(d, *pa, *pb, 1);
 				plus--;
 			}
+			else
+				break ;
 		}
 		return (1);
 	}

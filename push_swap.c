@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 20:31:10 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/27 23:59:55 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		ps_ok(t_ps *a, t_ps *b)
 	return (1);
 }
 
-static int		ok_ab(t_ps *p)
+int				ok_ab(t_ps *p)
 {
 	t_ps	*tmp;
 
@@ -62,7 +62,7 @@ static int		sort_b(t_data *d, t_ps *a, t_ps *b)
 		else if (check_pa(b))
 		{
 			ps_pa(&a, &b);
-			check_post_pa(d, &a, &b);
+			check_post_pa(d, &a, &b, 1);
 		}
 		else
 			work--;
@@ -91,7 +91,7 @@ void			sort_a(t_data *d, t_ps *a, t_ps *b)
 		{
 			ps_pb(&a, &b);
 			ps_print_piles(d, a, b, 1);
-			check_post_pb(d, &a, &b);
+			check_post_pb(d, &a, &b, 1);
 		}
 		else if (check_rra(d, a))
 			ps_rra(&a);
