@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/20 19:15:03 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/27 21:32:50 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		check_sb(t_ps *pb)
 	last = pb;
 	while (last && last->next)
 		last = last->next;
-	if (b && b->next && b->nb < b->next->nb && b->nb > last->nb)
+	if (b && b->next && b->nb < b->next->nb &&
+			(b->nb > last->nb || last->nb == b->next->nb))
 		return (1);
 	return (0);
 }
@@ -57,25 +58,49 @@ int		check_rb(t_ps *pb)
 int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
 {
 	t_ps	*tmp;
+	int		magic_a;
+	int		plus;
 	int		magic_b;
 
-	tmp = *pb;
+	magic_a = 0;
+	plus = 0;
 	magic_b = 0;
-	if (*pa && *pb && (*pb)->next && (*pa)->nb < tmp->nb)
+	tmp = *pa;
+	if (*pa && *pb && (*pa)->nb < (*pb)->nb)
 	{
-		while (tmp && tmp->next && (*pa)->nb < tmp->nb)
+		while (tmp && tmp->next && (*pb)->nb > tmp->nb)
+		{
+			magic_a++;
+			tmp = tmp->next;
+		}
+		plus = magic_a;
+		tmp = *pb;
+		while (tmp && (*pa)->nb < tmp->nb)
 		{
 			magic_b++;
 			tmp = tmp->next;
 		}
-		ps_print_piles(d, *pa, *pb, ps_ra(pa));
-		while (magic_b--)
+		while (magic_a--)
 		{
-			ps_print_piles(d, *pa, *pb, ps_pa(pa, pb));
-			if (chr_opt(d->opts, OPT_V))
-				ps_print_piles(d, *pa, *pb, 2);
+			ps_ra(pa);
+			ps_print_piles(d, *pa, *pb, 1);
 		}
-		ps_print_piles(d, *pa, *pb, ps_rra(pa));
+		while (magic_b || plus)
+		{
+			tmp = get_last(*pa);
+			if (*pb && (*pb)->nb > tmp->nb)
+			{
+				ps_pa(pa, pb);
+				ps_print_piles(d, *pa, *pb, 1);
+				magic_b--;
+			}
+			else
+			{
+				ps_rra(pa);
+				ps_print_piles(d, *pa, *pb, 1);
+				plus--;
+			}
+		}
 		return (1);
 	}
 	return (0);

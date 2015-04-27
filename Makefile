@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
-#    Updated: 2015/04/20 21:12:15 by mwilk            ###   ########.fr        #
+#    Updated: 2015/04/23 20:03:30 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = main.c\
 	  ps_check_b.c\
 	  ps_check_list.c\
 	  ps_utils.c\
+	  ps_init.c\
 	  ps_print.c\
 	  ps_options.c\
 
@@ -44,6 +45,7 @@ PS_H = -I ./includes
 all: $(NAME)
 
 $(NAME):
+	@echo "\033[31m <(*.*<) Making The Lib (>*o*)> \033[0m"
 	@gcc -g $(CFLAGS) $(PS_H) -c $(SRCS)
 	@mkdir $(OBJ_PATH)
 	@gcc -o $(NAME) $(OBJ)

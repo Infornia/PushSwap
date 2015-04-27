@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/20 20:13:30 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/27 20:13:13 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		check_sa(t_data *d, t_ps *pa)
 	a = pa;
 	while (last && last->next)
 		last = last->next;
-	if (a->nb > a->next->nb && (a->nb < last->nb || d->special > 1))
+	if ((a->nb > a->next->nb && (a->nb < last->nb || d->special > 1))
+			|| d->min == a->next->nb)
 	{
 		if (d->special)
 			d->special--;
@@ -92,7 +93,7 @@ int		magic_check_a(t_data *d, t_ps **pa)
 		}
 		tmp = tmp->next;
 	}
-	if (mid_or_feed <= count && stop > 1 && !d->special)
+	if (mid_or_feed < count && stop > 1 && !d->special)
 	{
 		d->special = 0;
 		count = tmp->nb;
@@ -100,6 +101,7 @@ int		magic_check_a(t_data *d, t_ps **pa)
 		{
 			if (d->special == 0)
 			{
+				pnbr((*pa)->nb);
 				ps_rra(pa);
 				ps_print_piles(d, *pa, NULL, 1);
 				count = (*pa)->nb < count ? (*pa)->nb : count;
@@ -117,13 +119,16 @@ int		magic_check_a(t_data *d, t_ps **pa)
 		if (ps_special_rra(d, pa, count))
 			d->special++;
 		if (check_sa(d, *pa))
-			ps_print_piles(d, *pa, NULL, ps_sa(pa));
+		{
+			ps_sa(&(*pa));
+			ps_print_piles(d, *pa, NULL, 1);
+		}
 		return (1);
 	}
 	return (0);
 }
 
-int		check_pb(t_ps *pa)
+int		check_pb(t_data *d, t_ps *pa)
 {
 	t_ps	*a;
 	t_ps	*last;
@@ -132,7 +137,7 @@ int		check_pb(t_ps *pa)
 	last = pa;
 	while (last && last->next)
 		last = last->next;
-	if (a->nb < a->next->nb && a->nb < last->nb)
+	if ((a->nb < a->next->nb && a->nb < last->nb) || d->min == pa->nb)
 		return (1);
 	return (0);
 }

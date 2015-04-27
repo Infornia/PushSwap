@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/20 19:13:10 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/27 21:11:46 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct			s_data
 	char			opts[NB_OPTS + 1];
 	int				color[4];
 	int				v;
+	int				min;
 	int				moves;
 	int				nb_color_opt;
 	int				nb_nbr;
@@ -60,6 +61,7 @@ int			tt_atoi(const char *str);
 int			tt_isspace(int c);
 void		pstr(char *s);
 void		pnbr(int nb);
+t_ps		*get_last(t_ps *h);
 
 /*
  ** Errors
@@ -116,14 +118,14 @@ int			ps_rrb(t_ps **b);
 /*
  ** Ps_Check
 */
-int			check_post_pa(t_data *d, t_ps *a, t_ps *b);
-int			check_post_pb(t_data *d, t_ps *a, t_ps *b);
+int			check_post_pa(t_data *d, t_ps **a, t_ps **b);
+int			check_post_pb(t_data *d, t_ps **a, t_ps **b);
 
 int			check_sa(t_data *d, t_ps *pa);
 int			check_ra(t_data *d, t_ps *pa);
 int			check_rra(t_data *d, t_ps *pa);
 int			magic_check_a(t_data *d, t_ps **pa);
-int			check_pb(t_ps *pa);
+int			check_pb(t_data *d, t_ps *pa);
 
 int			check_sb(t_ps *pb);
 int			check_rb(t_ps *pb);
