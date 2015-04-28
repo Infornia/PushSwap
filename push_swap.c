@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 23:59:55 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/28 18:31:28 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,33 @@ int				ok_ab(t_ps *p)
 	return (1);
 }
 
-static int		sort_b(t_data *d, t_ps *a, t_ps *b)
+static int		sort_b(t_data *d, t_ps **a, t_ps **b)
 {
 	int	work;
 
 	work = 1;
 	//pstr("Fin tri de a\n");
-	while ((b && ok_ab(b)) || !ok_ab(b))
+	while ((*b && ok_ab(*b)) || !ok_ab(*b))
 	{
-		if (check_sb(b))
-			ps_sb(&b);
-		else if (check_rb(b))
-			ps_rb(&b);
-		else if (check_rrb(b))
-			ps_rrb(&b);
-		else if (magic_check_b(d, &a, &b))
-			;
-		else if (check_pa(b))
+		if (check_sb(*b))
+			ps_sb(b);
+		else if (check_rb(*b))
+			ps_rb(b);
+		else if (check_rrb(*b))
+			ps_rrb(b);
+		else if (magic_check_b(d, *a, *b))
+			magic_b(d, a, b);
+		else if (check_pa(*b))
 		{
-			ps_pa(&a, &b);
-			check_post_pa(d, &a, &b, 1);
+			ps_pa(a, b);
+			check_post_pa(d, a, b, 1);
 		}
 		else
 			work--;
 		work++;
-		ps_print_piles(d, a, b, 1);
+		ps_print_piles(d, *a, *b, 1);
 	}
-	if (ps_ok(a, b) || work)
+	if (ps_ok(*a, *b) || work)
 	{
 		//ps_pcolor("\n\nSUCCESSFULL!!!!!!!!\n", d->color[1]);
 		return (1);
@@ -81,7 +81,7 @@ void			sort_a(t_data *d, t_ps *a, t_ps *b)
 {
 	while (!ps_ok(a, b))
 	{
-		if (ok_ab(a) && sort_b(d, a, b))
+		if (ok_ab(a) && sort_b(d, &a, &b) && ok_ab(a))
 			break;
 		else if (check_sa(d, a))
 			ps_sa(&a);
@@ -95,11 +95,13 @@ void			sort_a(t_data *d, t_ps *a, t_ps *b)
 		}
 		else if (check_rra(d, a))
 			ps_rra(&a);
-		else if (magic_check_a(d, &a))
-			;
+		else if (magic_check_a(d, a, b))
+			magic_b(d, &a, &b);
 		ps_print_piles(d, a, b, 1);
+		//pstr("The head\n");
+		//pnbr(a->nb);
+		//pstr("\n");
 	}
-	//if (ps_ok(a, NULL))
 	//	ps_pcolor("\nYOU'RE THE BEST MY LORD\n", d->color[2]);
 	if (chr_opt(d->opts, OPT_N))
 		ps_pmoves(d->moves, d->color[3]);

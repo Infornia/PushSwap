@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 20:13:13 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/28 17:30:59 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,15 @@ int		check_ra(t_data *d, t_ps *pa)
 	return (0);
 }
 
-int		magic_check_a(t_data *d, t_ps **pa)
+int		magic_check_a(t_data *d, t_ps *pa, t_ps *pb)
+{
+	(void)d;
+	if (pa && pb && pb->next && pa->nb < pb->nb)
+		return (1);
+	return (0);
+}
+
+/*int		special_check_a(t_data *d, t_ps **pa)
 {
 	int		stop;
 	int		count;
@@ -126,7 +134,7 @@ int		magic_check_a(t_data *d, t_ps **pa)
 		return (1);
 	}
 	return (0);
-}
+}*/
 
 int		check_pb(t_data *d, t_ps *pa)
 {

@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 23:52:38 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/28 17:31:47 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ int			ps_rra(t_ps **a);
 int			ps_special_rra(t_data *d, t_ps **a, int min);
 int			ps_rrb(t_ps **b);
 
+void		magic_a(t_data *d, t_ps **pa, t_ps **pb);
+void		magic_b(t_data *d, t_ps **pa, t_ps **pb);
+
 /*
  ** Ps_Check
 */
@@ -125,12 +128,13 @@ int			check_post_pb(t_data *d, t_ps **a, t_ps **b, int go);
 int			check_sa(t_data *d, t_ps *pa);
 int			check_ra(t_data *d, t_ps *pa);
 int			check_rra(t_data *d, t_ps *pa);
-int			magic_check_a(t_data *d, t_ps **pa);
+//int			special_check_a(t_data *d, t_ps **pa);
+int			magic_check_a(t_data *d, t_ps *pa, t_ps *pb);
 int			check_pb(t_data *d, t_ps *pa);
 
 int			check_sb(t_ps *pb);
 int			check_rb(t_ps *pb);
 int			check_rrb(t_ps *pb);
-int			magic_check_b(t_data *d, t_ps **pa, t_ps **pb);
+int			magic_check_b(t_data *d, t_ps *pa, t_ps *pb);
 int			check_pa(t_ps *pb);
 #endif /* !PS_H */

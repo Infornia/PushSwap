@@ -133,7 +133,7 @@ def tester_num_arguments(num_args, should_print=1):
     i = 0
     for permutation in itertools.permutations([i for i in range(num_args)]):
         cmd = './push_swap ' + convert_permutation_to_arguments(permutation);
-	print('./push_swap ' + convert_permutation_to_arguments(permutation))
+	#print('./push_swap ' + convert_permutation_to_arguments(permutation))
         if (should_print):
             print('testing "' + str(cmd) + '" ', end="")
         begin_time = time()

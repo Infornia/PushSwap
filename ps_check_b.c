@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 23:33:03 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/28 16:36:46 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,58 +55,11 @@ int		check_rb(t_ps *pb)
 	return (0);
 }
 
-int		magic_check_b(t_data *d, t_ps **pa, t_ps **pb)
+int		magic_check_b(t_data *d, t_ps *pa, t_ps *pb)
 {
-	t_ps	*tmp;
-	int		magic_a;
-	int		plus;
-	int		magic_b;
-
-	magic_a = 0;
-	plus = 0;
-	magic_b = 0;
-	tmp = *pa;
-	if (*pa && *pb && (*pa)->nb < (*pb)->nb)
-	{
-		while (tmp && (*pb)->nb > tmp->nb)
-		{
-			magic_a++;
-			tmp = tmp->next;
-		}
-		plus = magic_a;
-		tmp = *pb;
-		while (tmp && (*pa)->nb < tmp->nb)
-		{
-			magic_b++;
-			tmp = tmp->next;
-		}
-		while (magic_a--)
-		{
-			ps_ra(pa);
-			ps_print_piles(d, *pa, *pb, 1);
-		}
-		while (magic_b || plus)
-		{
-			ps_print_piles(d, *pa, *pb, 1);
-			tmp = get_last(*pa);
-			if (*pb && ((*pb)->nb > tmp->nb || (*pa)->nb < tmp->nb))
-			{
-				//pstr("yep");
-				ps_pa(pa, pb);
-				check_post_pa(d, pa, pb, 0);
-				magic_b--;
-			}
-			else if (plus)
-			{
-				ps_rra(pa);
-				ps_print_piles(d, *pa, *pb, 1);
-				plus--;
-			}
-			else
-				break ;
-		}
+	(void)d;
+	if (pa && pb && (pa)->nb < (pb)->nb)
 		return (1);
-	}
 	return (0);
 }
 
