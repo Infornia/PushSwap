@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/27 19:46:11 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 09:50:27 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int				ps_pa(t_ps **a, t_ps **b)
 {
 	if (*b)
 	{
-		ps_ps(a,b);
+		ps_ps(a, b);
 		write(1, "pa ", 3);
 		return (1);
 	}
@@ -37,7 +37,7 @@ int				ps_pb(t_ps **a, t_ps **b)
 {
 	if (*a)
 	{
-		ps_ps(b,a);
+		ps_ps(b, a);
 		write(1, "pb ", 3);
 		return (2);
 	}

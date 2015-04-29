@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 13:47:57 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/20 21:11:45 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 09:53:31 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ void	ps_pmoves(int moves, int color)
 	pstr("\033[0m");
 }
 
+static void print_help(t_ps *tmp)
+{
+	while (tmp)
+	{
+		pnbr(tmp->nb);
+		if (tmp->next)
+			pstr(" ");
+		else
+			pstr("\n");
+		tmp = tmp->next;
+	}
+}
+
 void	ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color)
 {
 	t_ps	*tmp;
@@ -45,26 +58,10 @@ void	ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color)
 		tmp = a;
 		if (tmp)
 			pstr("\b\nPile A: ");
-		while (tmp)
-		{
-			pnbr(tmp->nb);
-			if (tmp->next)
-				pstr(" ");
-			else
-				pstr("\n");
-			tmp = tmp->next;
-		}
+		print_help(tmp);
 		tmp = b;
 		if (tmp)
 			pstr("Pile B: ");
-		while (tmp)
-		{
-			pnbr(tmp->nb);
-			if (tmp->next)
-				pstr(" ");
-			else
-				pstr("\n");
-			tmp = tmp->next;
-		}
+		print_help(d, tmp);
 	}
 }

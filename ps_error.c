@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 09:43:35 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	ps_error(void)
 {
-		write(1, "Error\n", 6);
-		exit(0);
+	write(1, "Error\n", 6);
+	exit(0);
 }
 
 void	ps_error_usage(void)
 {
-		pstr("\nUsage: ./push_swap [-");
-		pstr(OPTS);
-		pstr("]... [number 1] [number 2] ...\n");
-		exit(0);
+	pstr("\nUsage: ./push_swap [-");
+	pstr(OPTS);
+	pstr("]... [number 1] [number 2] ...\n");
+	exit(0);
 }
 
 void	ps_option_error(char c)
 {
-		pstr("PushSwap: invalid option -- -");
-		pstr(&c);
-		ps_error_usage();
+	pstr("PushSwap: invalid option -- -");
+	pstr(&c);
+	ps_error_usage();
 }
 
 int		ps_error_letter(char *s)

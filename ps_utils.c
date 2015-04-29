@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_utils.c                                        :+:      :+:    :+:   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 13:47:57 by mwilk             #+#    #+#             */
-/*   Updated: 2014/11/08 14:12:04 by mwilk            ###   ########.fr       */
+/*   Created: 2015/04/29 09:51:58 by mwilk             #+#    #+#             */
+/*   Updated: 2015/04/29 09:52:01 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pchar(char c)
 {
-		write(1, &c, 1);
+	write(1, &c, 1);
 }
 
 void	pstr(char *s)
@@ -43,7 +43,7 @@ int		tt_isspace(int c)
 	return (0);
 }
 
-int			tt_atoi(const char *str)
+int		tt_atoi(const char *str)
 {
 	int		sign;
 	int		result;

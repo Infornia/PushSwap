@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 19:54:11 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/28 17:15:17 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 09:45:09 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		izero(int magic[3])
 	magic[2] = 0;
 }
 
-void		magic_a(t_data *d, t_ps **pa, t_ps **pb)
+void			magic_a(t_data *d, t_ps **pa, t_ps **pb)
 {
 	int		rb_pb_rrb[3];
 	t_ps	*tmp;
@@ -55,7 +55,7 @@ void		magic_a(t_data *d, t_ps **pa, t_ps **pb)
 	}
 }
 
-void		magic_b(t_data *d, t_ps **pa, t_ps **pb)
+void			magic_b(t_data *d, t_ps **pa, t_ps **pb)
 {
 	int		ra_pa_rra[3];
 	t_ps	*tmp;

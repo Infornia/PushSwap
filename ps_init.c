@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/21 20:37:29 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/22 00:32:36 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 09:44:24 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ t_ps		*ps_init(t_data *d, int ac, char **av)
 		else
 		{
 			nb = tt_atoi(av[ac]);
-			//if (!d->min)
-			//	d->min = nb;
 			ps_front(&a, ps_new(nb));
 			d->nb_nbr += 1;
 			d->min = nb < d->min ? nb : d->min;

@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/28 18:31:28 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 09:59:09 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			sort_a(t_data *d, t_ps *a, t_ps *b)
 	while (!ps_ok(a, b))
 	{
 		if (ok_ab(a) && sort_b(d, &a, &b) && ok_ab(a))
-			break;
+			break ;
 		else if (check_sa(d, a))
 			ps_sa(&a);
 		else if (check_ra(d, a))
