@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 13:47:57 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:53:31 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 10:17:34 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color)
 		tmp = b;
 		if (tmp)
 			pstr("Pile B: ");
-		print_help(d, tmp);
+		print_help(tmp);
 	}
 }

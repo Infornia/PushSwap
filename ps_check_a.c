@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 09:41:05 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:42:16 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 10:17:09 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		magic_check_a(t_data *d, t_ps *pa, t_ps *pb)
 	return (0);
 }
 
-/*int		special_check_a(t_data *d, t_ps **pa)
+int		special_check_a(t_data *d, t_ps **pa)
 {
 	int		stop;
 	int		count;
@@ -134,7 +134,7 @@ int		magic_check_a(t_data *d, t_ps *pa, t_ps *pb)
 		return (1);
 	}
 	return (0);
-}*/
+}
 
 int		check_pb(t_data *d, t_ps *pa)
 {

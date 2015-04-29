@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 09:42:43 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:42:48 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 11:00:29 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		check_post_pb(t_data *d, t_ps **a, t_ps **b, int go)
 		ps_rrb(b);
 	else
 		return (0);
-	check_post_pb(d, a, b, 0);
 	ps_print_piles(d, *a, *b, 1);
 	return (1);
 }

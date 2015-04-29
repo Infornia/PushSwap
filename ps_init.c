@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/21 20:37:29 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:44:24 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 10:51:45 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	ini_opt(t_data *d)
 	d->color[3] = GREEN;
 	d->nb_color_opt = 0;
 	d->nb_nbr = 0;
+	d->init = 0;
 	d->special = 0;
 	d->moves = 0;
 }

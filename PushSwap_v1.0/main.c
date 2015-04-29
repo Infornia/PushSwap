@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/03/25 20:58:04 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 10:15:46 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		main(int ac, char **av)
 	while (ac > 1)
 		ps_front(&a, ps_new(tt_atoi(av[--ac])));
 	a = sort(a);
-	write(1, "\b\n", 2);
+	//write(1, "\b\n", 2);
 	ps_del(a);
 	return (0);
 }

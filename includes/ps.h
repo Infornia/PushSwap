@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/28 17:31:47 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/04/29 10:51:16 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct			s_data
 	int				color[4];
 	int				v;
 	int				min;
+	int				init;
 	int				moves;
 	int				nb_color_opt;
 	int				nb_nbr;
@@ -128,7 +129,7 @@ int			check_post_pb(t_data *d, t_ps **a, t_ps **b, int go);
 int			check_sa(t_data *d, t_ps *pa);
 int			check_ra(t_data *d, t_ps *pa);
 int			check_rra(t_data *d, t_ps *pa);
-//int			special_check_a(t_data *d, t_ps **pa);
+int			special_check_a(t_data *d, t_ps **pa);
 int			magic_check_a(t_data *d, t_ps *pa, t_ps *pb);
 int			check_pb(t_data *d, t_ps *pa);
 
