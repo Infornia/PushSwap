@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 19:54:11 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:45:09 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/01 20:16:06 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@ static void		izero(int magic[3])
 	magic[0] = 0;
 	magic[1] = 0;
 	magic[2] = 0;
+}
+
+int				magic_check_a(t_data *d, t_ps *pa, t_ps *pb)
+{
+	(void)d;
+	if (pa && pb && pb->next && pa->nb < pb->nb)
+		return (1);
+	return (0);
+}
+
+int				magic_check_b(t_data *d, t_ps *pa, t_ps *pb)
+{
+	(void)d;
+	if (pa && pb && (pa)->nb < (pb)->nb)
+		return (1);
+	return (0);
 }
 
 void			magic_a(t_data *d, t_ps **pa, t_ps **pb)
@@ -38,18 +54,11 @@ void			magic_a(t_data *d, t_ps **pa, t_ps **pb)
 	{
 		ps_print_piles(d, *pa, *pb, 1);
 		tmp = get_last(*pb);
-		if (*pa && ((*pa)->nb < tmp->nb || (*pa)->nb > tmp->nb))
-		{
-			//pstr("yep");
-			ps_pb(pa, pb);
-			check_post_pb(d, pa, pb, 0);
+		if (*pa && ((*pa)->nb < tmp->nb || (*pa)->nb > tmp->nb) &&
+				ps_pb(pa, pb) && check_post_pb(d, pa, pb, 0))
 			(rb_pb_rrb[1])--;
-		}
-		else if (rb_pb_rrb[2] && ps_rrb(pb))
-		{
-			ps_print_piles(d, *pa, *pb, 1);
+		else if (rb_pb_rrb[2] && ps_rrb(pb) && ps_print_piles(d, *pa, *pb, 1))
 			(rb_pb_rrb[2])--;
-		}
 		else
 			break ;
 	}
@@ -74,18 +83,11 @@ void			magic_b(t_data *d, t_ps **pa, t_ps **pb)
 	{
 		ps_print_piles(d, *pa, *pb, 1);
 		tmp = get_last(*pa);
-		if (*pb && ((*pb)->nb > tmp->nb || (*pa)->nb < tmp->nb))
-		{
-			//pstr("yep");
-			ps_pa(pa, pb);
-			check_post_pa(d, pa, pb, 0);
+		if (*pb && ((*pb)->nb > tmp->nb || (*pa)->nb < tmp->nb) &&
+				ps_pa(pa, pb) && check_post_pa(d, pa, pb, 0))
 			(ra_pa_rra[1])--;
-		}
-		else if (ra_pa_rra[2] && ps_rra(pa))
-		{
-			ps_print_piles(d, *pa, *pb, 1);
+		else if (ra_pa_rra[2] && ps_rra(pa) && ps_print_piles(d, *pa, *pb, 1))
 			(ra_pa_rra[2])--;
-		}
 		else
 			break ;
 	}

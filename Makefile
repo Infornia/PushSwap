@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
-#    Updated: 2015/04/28 16:33:14 by mwilk            ###   ########.fr        #
+#    Updated: 2015/05/01 19:51:25 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,10 @@ SRCS = $(addprefix $(SRC_PATH),$(SRC))
 PS_H = -I ./includes
 
 all: $(NAME)
+
+norm:
+	@echo "\033[32mnorminette...\033[0m"
+	@norminette $(SRCS)
 
 $(NAME):
 	@echo "\033[31m <(*.*<) Making The Lib (>*o*)> \033[0m"

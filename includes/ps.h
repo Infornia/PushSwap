@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 10:51:16 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/01 20:18:13 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		ps_option_error(char c);
 
 void		ps_pcolor(char *s, int color);
 void		ps_pmoves(int moves, int color);
-void		ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color);
+int			ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color);
 
 /*
  ** Chain_list

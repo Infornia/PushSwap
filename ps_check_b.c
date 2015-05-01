@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 09:42:25 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:42:38 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/01 20:13:59 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@ int		check_rb(t_ps *pb)
 	while (last && last->next)
 		last = last->next;
 	if (b && b->next && b->nb < b->next->nb && b->nb < last->nb)
-		return (1);
-	return (0);
-}
-
-int		magic_check_b(t_data *d, t_ps *pa, t_ps *pb)
-{
-	(void)d;
-	if (pa && pb && (pa)->nb < (pb)->nb)
 		return (1);
 	return (0);
 }

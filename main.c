@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:40:24 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/01 20:23:30 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		main(int ac, char **av)
 	a = ps_init(&d, ac, av);
 	ps_error_number(d, a);
 	sort_a(&d, a, b);
-	//write(1, "\b\n", 2);
+	if (chr_opt(d.opts, OPT_N))
+		ps_pmoves(d.moves, d.color[3]);
 	return (0);
 }

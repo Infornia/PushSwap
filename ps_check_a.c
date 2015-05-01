@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 09:41:05 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 10:17:09 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/01 20:13:25 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,6 @@ int		check_ra(t_data *d, t_ps *pa)
 	return (0);
 }
 
-int		magic_check_a(t_data *d, t_ps *pa, t_ps *pb)
-{
-	(void)d;
-	if (pa && pb && pb->next && pa->nb < pb->nb)
-		return (1);
-	return (0);
-}
-
 int		special_check_a(t_data *d, t_ps **pa)
 {
 	int		stop;
@@ -94,7 +86,7 @@ int		special_check_a(t_data *d, t_ps **pa)
 		if (stop == 1 && !yes)
 			yes = tmp->nb;
 		if (yes && yes > tmp->next->nb && (tmp->next->next ||
-				   (stop == 1 && !tmp->next->next)))
+				(stop == 1 && !tmp->next->next)))
 		{
 			stop++;
 			yes = 0;
