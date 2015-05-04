@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 09:41:05 by mwilk             #+#    #+#             */
-/*   Updated: 2015/05/01 20:13:25 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/04 18:44:24 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		check_sa(t_data *d, t_ps *pa)
 	{
 		if (d->special)
 			d->special--;
+		d->print = 1;
 		return (1);
 	}
 	return (0);
@@ -44,6 +45,7 @@ int		check_rra(t_data *d, t_ps *pa)
 	{
 		if (d->special)
 			d->special--;
+		d->print = 1;
 		return (1);
 	}
 	return (0);
@@ -62,6 +64,7 @@ int		check_ra(t_data *d, t_ps *pa)
 	{
 		if (d->special)
 			d->special--;
+		d->print = 1;
 		return (1);
 	}
 	return (0);
@@ -116,7 +119,7 @@ int		special_check_a(t_data *d, t_ps **pa)
 			stop--;
 			d->special++;
 		}
-		if (ps_special_rra(d, pa, count))
+		if (ps_special_rra(d, pa, count) && ps_print_piles(d, *pa, NULL, 1))
 			d->special++;
 		if (check_sa(d, *pa))
 		{
@@ -138,6 +141,9 @@ int		check_pb(t_data *d, t_ps *pa)
 	while (last && last->next)
 		last = last->next;
 	if ((a->nb < a->next->nb && a->nb < last->nb) || d->min == pa->nb)
+	{
+		d->print = 1;
 		return (1);
+	}
 	return (0);
 }

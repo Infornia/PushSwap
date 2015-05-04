@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 19:54:11 by mwilk             #+#    #+#             */
-/*   Updated: 2015/05/01 20:16:06 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/05/04 18:28:38 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void			magic_a(t_data *d, t_ps **pa, t_ps **pb)
 	tmp = *pa;
 	while (tmp && (*pb)->nb > tmp->nb && ++(rb_pb_rrb[1]))
 		tmp = tmp->next;
-	while ((rb_pb_rrb[0])-- && ps_rb(pb))
-		ps_print_piles(d, *pa, *pb, 1);
+	while ((rb_pb_rrb[0])--)
+		ps_print_piles(d, *pa, *pb, ps_rb(pb));
 	while (rb_pb_rrb[1] || rb_pb_rrb[2])
 	{
-		ps_print_piles(d, *pa, *pb, 1);
 		tmp = get_last(*pb);
 		if (*pa && ((*pa)->nb < tmp->nb || (*pa)->nb > tmp->nb) &&
-				ps_pb(pa, pb) && check_post_pb(d, pa, pb, 0))
+				ps_print_piles(d, *pa, *pb, ps_pb(pa, pb)) &&
+				check_post_pb(d, pa, pb, 0))
 			(rb_pb_rrb[1])--;
 		else if (rb_pb_rrb[2] && ps_rrb(pb) && ps_print_piles(d, *pa, *pb, 1))
 			(rb_pb_rrb[2])--;
@@ -77,16 +77,16 @@ void			magic_b(t_data *d, t_ps **pa, t_ps **pb)
 	tmp = *pb;
 	while (tmp && (*pa)->nb < tmp->nb && ++(ra_pa_rra[1]))
 		tmp = tmp->next;
-	while ((ra_pa_rra[0])-- && ps_ra(pa))
-		ps_print_piles(d, *pa, *pb, 1);
+	while ((ra_pa_rra[0])--)
+		ps_print_piles(d, *pa, *pb, ps_ra(pa));
 	while (ra_pa_rra[1] || ra_pa_rra[2])
 	{
-		ps_print_piles(d, *pa, *pb, 1);
 		tmp = get_last(*pa);
 		if (*pb && ((*pb)->nb > tmp->nb || (*pa)->nb < tmp->nb) &&
-				ps_pa(pa, pb) && check_post_pa(d, pa, pb, 0))
+				ps_print_piles(d, *pa, *pb, ps_pa(pa, pb)) &&
+				check_post_pa(d, pa, pb, 0))
 			(ra_pa_rra[1])--;
-		else if (ra_pa_rra[2] && ps_rra(pa) && ps_print_piles(d, *pa, *pb, 1))
+		else if (ra_pa_rra[2] && ps_print_piles(d, *pa, *pb, ps_rra(pa)))
 			(ra_pa_rra[2])--;
 		else
 			break ;
