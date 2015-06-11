@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/21 20:37:29 by mwilk             #+#    #+#             */
-/*   Updated: 2015/06/11 18:19:22 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/11 18:44:31 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ static void	ini_opt(t_data *d)
 	d->init = 0;
 	d->special = 0;
 	d->moves = 0;
+}
+
+static void	set_opt(t_data *d)
+{
+	if (chr_opt(d->opts, OPT_V))
+		d->v = 1;
+	if (chr_opt(d->opts, OPT_C))
+		d->c = 1;
+	if (chr_opt(d->opts, OPT_N))
+		d->n = 1;
 }
 
 t_ps		*ps_init(t_data *d, int ac, char **av)
@@ -53,7 +63,6 @@ t_ps		*ps_init(t_data *d, int ac, char **av)
 			d->min = nb < d->min ? nb : d->min;
 		}
 	}
-	if (chr_opt(d->opts, OPT_V))
-		d->v = 1;
+	set_opt(d);
 	return (a);
 }

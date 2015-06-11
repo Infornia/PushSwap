@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/06/11 17:28:44 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/11 18:59:54 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define NB_OPTS		4
 #define OPT_V		'v'
 #define OPT_N		'n'
+#define OPT_C		'c'
 
 /*
  ** Structures
@@ -43,6 +44,8 @@ typedef struct			s_data
 	char			opts[NB_OPTS + 1];
 	int				color[4];
 	int				v;
+	int				c;
+	int				n;
 	int				min;
 	int				init;
 	int				print;
@@ -76,7 +79,7 @@ void		ps_option_error(char c);
 */
 
 void		ps_pcolor(char *s, int color);
-void		ps_pmoves(int moves, int color);
+void		ps_pmoves(int moves);
 int			ps_print_piles(t_data *d, t_ps *a, t_ps *b, int color);
 
 /*
