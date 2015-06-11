@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 09:51:58 by mwilk             #+#    #+#             */
-/*   Updated: 2015/04/29 09:52:01 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/11 18:18:13 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	pstr(char *s)
 
 void	pnbr(int n)
 {
+	if (n < 0)
+	{
+		pchar('-');
+		n *= -1;
+	}
 	if (n >= 10)
 	{
 		pnbr(n / 10);
@@ -49,7 +54,7 @@ int		tt_atoi(const char *str)
 	int		result;
 
 	result = 0;
-	sign = 0;
+	sign = 1;
 	while (tt_isspace(*str))
 		str++;
 	if (*str == '-')
@@ -64,7 +69,5 @@ int		tt_atoi(const char *str)
 		result = result * 10 + *str - 48;
 		str++;
 	}
-	if (sign)
-		result = -result;
-	return (result);
+	return (result * sign);
 }

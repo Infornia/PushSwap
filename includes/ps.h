@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/05/04 18:42:03 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/11 17:28:44 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@
 #define PINK		35
 #define GREEN		34
 #define OPTS		"123cnv"
-#define NB_OPTS		7
+#define NB_OPTS		4
 #define OPT_V		'v'
 #define OPT_N		'n'
-#define OPT_PINK	'1'
-#define OPT_BLUE	'2'
-#define OPT_GREEN	'3'
 
 /*
  ** Structures
@@ -50,7 +47,6 @@ typedef struct			s_data
 	int				init;
 	int				print;
 	int				moves;
-	int				nb_color_opt;
 	int				nb_nbr;
 	int				special;
 }						t_data;
