@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/21 20:37:29 by mwilk             #+#    #+#             */
-/*   Updated: 2015/06/12 14:43:11 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/12 15:46:51 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static void	ini_opt(t_data *d)
 	d->init = 0;
 	d->special = 0;
 	d->moves = 0;
+	d->v = 0;
+	d->n = 0;
+	d->c = 0;
+	d->yes = 0;
+	d->stop = 0;
+	d->count = 0;
 }
 
 static void	set_opt(t_data *d)

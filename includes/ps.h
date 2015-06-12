@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/06/12 14:54:56 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/12 15:22:46 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ typedef struct			s_data
 	int			moves;
 	int			nb_nbr;
 	int			special;
+	int			yes;
+	int			stop;
+	int			count;
+	int			mid_or_feed;
 }						t_data;
 
 /*

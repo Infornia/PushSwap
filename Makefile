@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
-#    Updated: 2015/06/11 18:13:53 by mwilk            ###   ########.fr        #
+#    Updated: 2015/06/12 15:11:33 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = main.c\
 	  ps_check_rev_a.c\
 	  ps_check_b.c\
 	  ps_check_list.c\
+	  ps_special_check.c\
 	  ps_utils.c\
 	  ps_init.c\
 	  ps_print.c\
