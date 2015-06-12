@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 15:48:12 by mwilk             #+#    #+#             */
-/*   Updated: 2015/06/11 18:19:03 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/06/12 14:40:58 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ps_error_usage(void)
 void	ps_option_error(char c)
 {
 	pstr("PushSwap: invalid option -- -");
-	pstr(&c);
+	pchar(c);
 	ps_error_usage();
 }
 
@@ -37,7 +37,7 @@ int		ps_error_letter(char *s)
 {
 	while (*s)
 	{
-		if ((*s < '0' && *s != '-') || *s > '9' )
+		if ((*s < '0' && *s != '-') || *s > '9')
 			return (1);
 		++s;
 	}

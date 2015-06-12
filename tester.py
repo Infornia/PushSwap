@@ -85,6 +85,8 @@ def perform_operation(first, second, operation):
     elif (operation == 'rrr'):
         first = reverse_rotate(first)
         second = reverse_rotate(second)
+    elif (operation == '\b'):
+        first = first
     else:
         print('invalid operation: |' + str(operation) + '|')
         exit(1)
